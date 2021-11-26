@@ -29,7 +29,7 @@ type CommandMapperRPCServer struct {
 	Impl CommandMapper
 }
 
-func (c *CommandMapperRPCServer) Registry(args interface{}, resp *[]string) error {
+func (c *CommandMapperRPCServer) Commands(args interface{}, resp *[]string) error {
 	*resp = c.Impl.Commands()
 	return nil
 }
