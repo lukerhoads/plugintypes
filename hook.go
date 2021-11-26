@@ -65,9 +65,9 @@ type HookModuleRPC struct {
 	client *rpc.Client
 }
 
-func (h *HookModuleRPC) ParentCommand() []string {
+func (h *HookModuleRPC) GetParentCommand() []string {
 	var parentHook []string
-	cErr := h.client.Call("Plugin.ParentHook", new(interface{}), &parentHook)
+	cErr := h.client.Call("Plugin.GetParentHook", new(interface{}), &parentHook)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -75,9 +75,9 @@ func (h *HookModuleRPC) ParentCommand() []string {
 	return parentHook
 }
 
-func (h *HookModuleRPC) Name() string {
+func (h *HookModuleRPC) GetName() string {
 	var name string
-	cErr := h.client.Call("Plugin.Name", new(interface{}), &name)
+	cErr := h.client.Call("Plugin.GetName", new(interface{}), &name)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -85,9 +85,9 @@ func (h *HookModuleRPC) Name() string {
 	return name
 }
 
-func (h *HookModuleRPC) Type() string {
+func (h *HookModuleRPC) GetType() string {
 	var hook_type string
-	cErr := h.client.Call("Plugin.Type", new(interface{}), &hook_type)
+	cErr := h.client.Call("Plugin.GetType", new(interface{}), &hook_type)
 	if cErr != nil {
 		panic(cErr)
 	}

@@ -70,9 +70,9 @@ type CommandModuleRPC struct {
 	client *rpc.Client
 }
 
-func (c *CommandModuleRPC) ParentCommand() []string {
+func (c *CommandModuleRPC) GetParentCommand() []string {
 	var commands []string
-	cErr := c.client.Call("Plugin.ParentCommand", new(interface{}), &commands)
+	cErr := c.client.Call("Plugin.GetParentCommand", new(interface{}), &commands)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -80,9 +80,9 @@ func (c *CommandModuleRPC) ParentCommand() []string {
 	return commands
 }
 
-func (c *CommandModuleRPC) Name() string {
+func (c *CommandModuleRPC) GetName() string {
 	var name string
-	cErr := c.client.Call("Plugin.Name", new(interface{}), &name)
+	cErr := c.client.Call("Plugin.GetName", new(interface{}), &name)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -90,9 +90,9 @@ func (c *CommandModuleRPC) Name() string {
 	return name
 }
 
-func (c *CommandModuleRPC) Usage() string {
+func (c *CommandModuleRPC) GetUsage() string {
 	var usage string
-	cErr := c.client.Call("Plugin.Usage", new(interface{}), &usage)
+	cErr := c.client.Call("Plugin.GetUsage", new(interface{}), &usage)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -100,9 +100,9 @@ func (c *CommandModuleRPC) Usage() string {
 	return usage
 }
 
-func (c *CommandModuleRPC) ShortDesc() string {
+func (c *CommandModuleRPC) GetShortDesc() string {
 	var desc string
-	cErr := c.client.Call("Plugin.ShortDesc", new(interface{}), &desc)
+	cErr := c.client.Call("Plugin.GetShortDesc", new(interface{}), &desc)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -110,9 +110,9 @@ func (c *CommandModuleRPC) ShortDesc() string {
 	return desc
 }
 
-func (c *CommandModuleRPC) LongDesc() string {
+func (c *CommandModuleRPC) GetLongDesc() string {
 	var desc string
-	cErr := c.client.Call("Plugin.LongDesc", new(interface{}), &desc)
+	cErr := c.client.Call("Plugin.GetLongDesc", new(interface{}), &desc)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -120,9 +120,9 @@ func (c *CommandModuleRPC) LongDesc() string {
 	return desc
 }
 
-func (c *CommandModuleRPC) NumArgs() int {
+func (c *CommandModuleRPC) GetNumArgs() int {
 	var numArgs int
-	cErr := c.client.Call("Plugin.NumArgs", new(interface{}), &numArgs)
+	cErr := c.client.Call("Plugin.GetNumArgs", new(interface{}), &numArgs)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -144,32 +144,32 @@ type CommandModuleRPCServer struct {
 	Impl CommandModule
 }
 
-func (c *CommandModuleRPCServer) ParentCommand(args interface{}, resp *[]string) error {
+func (c *CommandModuleRPCServer) GetParentCommand(args interface{}, resp *[]string) error {
 	*resp = c.Impl.GetParentCommand()
 	return nil
 }
 
-func (c *CommandModuleRPCServer) Name(args interface{}, resp *string) error {
+func (c *CommandModuleRPCServer) GetName(args interface{}, resp *string) error {
 	*resp = c.Impl.GetName()
 	return nil
 }
 
-func (c *CommandModuleRPCServer) Usage(args interface{}, resp *string) error {
+func (c *CommandModuleRPCServer) GetUsage(args interface{}, resp *string) error {
 	*resp = c.Impl.GetUsage()
 	return nil
 }
 
-func (c *CommandModuleRPCServer) ShortDesc(args interface{}, resp *string) error {
+func (c *CommandModuleRPCServer) GetShortDesc(args interface{}, resp *string) error {
 	*resp = c.Impl.GetShortDesc()
 	return nil
 }
 
-func (c *CommandModuleRPCServer) LongDesc(args interface{}, resp *string) error {
+func (c *CommandModuleRPCServer) GetLongDesc(args interface{}, resp *string) error {
 	*resp = c.Impl.GetLongDesc()
 	return nil
 }
 
-func (c *CommandModuleRPCServer) NumArgs(args interface{}, resp *int) error {
+func (c *CommandModuleRPCServer) GetNumArgs(args interface{}, resp *int) error {
 	*resp = c.Impl.GetNumArgs()
 	return nil
 }
