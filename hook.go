@@ -29,7 +29,7 @@ type HookModuleRPC struct {
 
 func (h *HookModuleRPC) Init(ctx context.Context) error {
 	var err error
-	cErr := h.client.Call("Plugin.ParentCommand", InitArgs{ctx}, &err)
+	cErr := h.client.Call("Plugin.Init", InitArgs{ctx}, &err)
 	if cErr != nil {
 		panic(cErr)
 	}
