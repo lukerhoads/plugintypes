@@ -38,13 +38,13 @@ func (c *CommandModuleRPC) Init(ctx context.Context) error {
 }
 
 func (c *CommandModuleRPC) Registry() map[string]Command {
-	var commands map[string]Command
+	var commands interface{}
 	cErr := c.client.Call("Plugin.Registry", new(interface{}), &commands)
 	if cErr != nil {
 		panic(cErr)
 	}
 
-	return commands
+	return commands.(map[string]Command)
 }
 
 // func (h *CommandRPC) ParentCommand() []string {
@@ -129,7 +129,7 @@ func (h *CommandRPCServer) Init(args InitArgs, resp *error) error {
 	return nil
 }
 
-func (h *CommandRPCServer) Registry(args interface{}, resp *map[string]Command) error {
+func (h *CommandRPCServer) Registry(args interface{}, resp *interface{}) error {
 	*resp = h.Impl.Registry()
 	return nil
 }
