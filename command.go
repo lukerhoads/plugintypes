@@ -47,12 +47,12 @@ func (CommandMapperPlugin) Client(b *plugin.MuxBroker, c *rpc.Client) (interface
 }
 
 type Command struct {
-	ParentCommand []string
-	Name          string
-	Usage         string
-	ShortDesc     string
-	LongDesc      string
-	NumArgs       int
+	parentCommand []string
+	name          string
+	usage         string
+	shortDesc     string
+	longDesc      string
+	numArgs       int
 }
 
 // need getter method for the parameters!
@@ -144,38 +144,38 @@ type CommandModuleRPCServer struct {
 	Impl CommandModule
 }
 
-func (h *CommandModuleRPCServer) ParentCommand(args interface{}, resp *[]string) error {
-	*resp = h.Impl.ParentCommand()
+func (c *CommandModuleRPCServer) ParentCommand(args interface{}, resp *[]string) error {
+	*resp = c.Impl.ParentCommand()
 	return nil
 }
 
-func (h *CommandModuleRPCServer) Name(args interface{}, resp *string) error {
-	*resp = h.Impl.Name()
+func (c *CommandModuleRPCServer) Name(args interface{}, resp *string) error {
+	*resp = c.Impl.Name()
 	return nil
 }
 
-func (h *CommandModuleRPCServer) Usage(args interface{}, resp *string) error {
-	*resp = h.Impl.Usage()
+func (c *CommandModuleRPCServer) Usage(args interface{}, resp *string) error {
+	*resp = c.Impl.Usage()
 	return nil
 }
 
-func (h *CommandModuleRPCServer) ShortDesc(args interface{}, resp *string) error {
-	*resp = h.Impl.ShortDesc()
+func (c *CommandModuleRPCServer) ShortDesc(args interface{}, resp *string) error {
+	*resp = c.Impl.ShortDesc()
 	return nil
 }
 
-func (h *CommandModuleRPCServer) LongDesc(args interface{}, resp *string) error {
-	*resp = h.Impl.LongDesc()
+func (c *CommandModuleRPCServer) LongDesc(args interface{}, resp *string) error {
+	*resp = c.Impl.LongDesc()
 	return nil
 }
 
-func (h *CommandModuleRPCServer) NumArgs(args interface{}, resp *int) error {
-	*resp = h.Impl.NumArgs()
+func (c *CommandModuleRPCServer) NumArgs(args interface{}, resp *int) error {
+	*resp = c.Impl.NumArgs()
 	return nil
 }
 
-func (h *CommandModuleRPCServer) Exec(args ExecArgs, resp *error) error {
-	*resp = h.Impl.Exec(args.cmd, args.args)
+func (c *CommandModuleRPCServer) Exec(args ExecArgs, resp *error) error {
+	*resp = c.Impl.Exec(args.cmd, args.args)
 	return nil
 }
 
