@@ -37,7 +37,7 @@ func (c *CommandModuleRPC) Init(ctx context.Context) error {
 	return err
 }
 
-func (c *CommandModuleRPC) Registry(ctx context.Context) map[string]Command {
+func (c *CommandModuleRPC) Registry() map[string]Command {
 	var commands map[string]Command
 	cErr := c.client.Call("Plugin.Registry", new(interface{}), &commands)
 	if cErr != nil {
