@@ -47,22 +47,22 @@ func (CommandMapperPlugin) Client(b *plugin.MuxBroker, c *rpc.Client) (interface
 }
 
 type Command struct {
-	parentCommand []string
-	name          string
-	usage         string
-	shortDesc     string
-	longDesc      string
-	numArgs       int
+	ParentCommand []string
+	Name          string
+	Usage         string
+	ShortDesc     string
+	LongDesc      string
+	NumArgs       int
 }
 
 // need getter method for the parameters!
 type CommandModule interface {
-	ParentCommand() []string
-	Name() string
-	Usage() string
-	ShortDesc() string
-	LongDesc() string
-	NumArgs() int
+	GetParentCommand() []string
+	GetName() string
+	GetUsage() string
+	GetShortDesc() string
+	GetLongDesc() string
+	GetNumArgs() int
 	Exec(*cobra.Command, []string) error
 }
 
@@ -145,32 +145,32 @@ type CommandModuleRPCServer struct {
 }
 
 func (c *CommandModuleRPCServer) ParentCommand(args interface{}, resp *[]string) error {
-	*resp = c.Impl.ParentCommand()
+	*resp = c.Impl.GetParentCommand()
 	return nil
 }
 
 func (c *CommandModuleRPCServer) Name(args interface{}, resp *string) error {
-	*resp = c.Impl.Name()
+	*resp = c.Impl.GetName()
 	return nil
 }
 
 func (c *CommandModuleRPCServer) Usage(args interface{}, resp *string) error {
-	*resp = c.Impl.Usage()
+	*resp = c.Impl.GetUsage()
 	return nil
 }
 
 func (c *CommandModuleRPCServer) ShortDesc(args interface{}, resp *string) error {
-	*resp = c.Impl.ShortDesc()
+	*resp = c.Impl.GetShortDesc()
 	return nil
 }
 
 func (c *CommandModuleRPCServer) LongDesc(args interface{}, resp *string) error {
-	*resp = c.Impl.LongDesc()
+	*resp = c.Impl.GetLongDesc()
 	return nil
 }
 
 func (c *CommandModuleRPCServer) NumArgs(args interface{}, resp *int) error {
-	*resp = c.Impl.NumArgs()
+	*resp = c.Impl.GetNumArgs()
 	return nil
 }
 

@@ -47,15 +47,15 @@ func (HookMapperPlugin) Client(b *plugin.MuxBroker, c *rpc.Client) (interface{},
 }
 
 type Hook struct {
-	parentCommand []string
-	name          string
-	hook_type     string
+	ParentCommand []string
+	Name          string
+	HookType      string
 }
 
 type HookModule interface {
-	ParentCommand() []string
-	Name() string
-	Type() string
+	GetParentCommand() []string
+	GetName() string
+	GetType() string
 
 	PreRun(*cobra.Command, []string) error
 	PostRun(*cobra.Command, []string) error
@@ -120,17 +120,17 @@ type HookRPCServer struct {
 }
 
 func (h *HookRPCServer) ParentCommand(args interface{}, resp *[]string) error {
-	*resp = h.Impl.ParentCommand()
+	*resp = h.Impl.GetParentCommand()
 	return nil
 }
 
 func (h *HookRPCServer) Name(args interface{}, resp *string) error {
-	*resp = h.Impl.Name()
+	*resp = h.Impl.GetName()
 	return nil
 }
 
 func (h *HookRPCServer) Type(args interface{}, resp *string) error {
-	*resp = h.Impl.Type()
+	*resp = h.Impl.GetType()
 	return nil
 }
 
@@ -144,14 +144,14 @@ func (h *HookRPCServer) PostRun(args ExecArgs, resp *error) error {
 	return nil
 }
 
-type HookPlugin struct {
+type HookModulePlugin struct {
 	Impl HookModule
 }
 
-func (p *HookPlugin) Server(*plugin.MuxBroker) (interface{}, error) {
+func (p *HookModulePlugin) Server(*plugin.MuxBroker) (interface{}, error) {
 	return &HookRPCServer{Impl: p.Impl}, nil
 }
 
-func (HookPlugin) Client(b *plugin.MuxBroker, c *rpc.Client) (interface{}, error) {
+func (HookModulePlugin) Client(b *plugin.MuxBroker, c *rpc.Client) (interface{}, error) {
 	return &HookModuleRPC{client: c}, nil
 }
