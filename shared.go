@@ -12,8 +12,8 @@ type InitArgs struct {
 }
 
 type ExecArgs struct {
-	cmd  *cobra.Command
-	args []string
+	Cmd  *cobra.Command
+	Args []string
 }
 
 var HandshakeConfig = plugin.HandshakeConfig{
