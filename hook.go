@@ -67,7 +67,7 @@ type HookModuleRPC struct {
 
 func (h *HookModuleRPC) GetParentCommand() []string {
 	var parentHook []string
-	cErr := h.client.Call("Plugin.GetParentHook", new(interface{}), &parentHook)
+	cErr := h.client.Call("Plugin.GetParentCommand", new(interface{}), &parentHook)
 	if cErr != nil {
 		panic(cErr)
 	}
@@ -119,17 +119,17 @@ type HookRPCServer struct {
 	Impl HookModule
 }
 
-func (h *HookRPCServer) ParentCommand(args interface{}, resp *[]string) error {
+func (h *HookRPCServer) GetParentCommand(args interface{}, resp *[]string) error {
 	*resp = h.Impl.GetParentCommand()
 	return nil
 }
 
-func (h *HookRPCServer) Name(args interface{}, resp *string) error {
+func (h *HookRPCServer) GetName(args interface{}, resp *string) error {
 	*resp = h.Impl.GetName()
 	return nil
 }
 
-func (h *HookRPCServer) Type(args interface{}, resp *string) error {
+func (h *HookRPCServer) GetType(args interface{}, resp *string) error {
 	*resp = h.Impl.GetType()
 	return nil
 }
