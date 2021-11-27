@@ -135,12 +135,12 @@ func (h *HookRPCServer) Type(args interface{}, resp *string) error {
 }
 
 func (h *HookRPCServer) PreRun(args ExecArgs, resp *error) error {
-	*resp = h.Impl.PreRun(args.cmd, args.args)
+	*resp = h.Impl.PreRun(args.Cmd, args.Args)
 	return nil
 }
 
 func (h *HookRPCServer) PostRun(args ExecArgs, resp *error) error {
-	*resp = h.Impl.PostRun(args.cmd, args.args)
+	*resp = h.Impl.PostRun(args.Cmd, args.Args)
 	return nil
 }
 

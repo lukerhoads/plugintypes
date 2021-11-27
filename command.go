@@ -175,7 +175,7 @@ func (c *CommandModuleRPCServer) GetNumArgs(args interface{}, resp *int) error {
 }
 
 func (c *CommandModuleRPCServer) Exec(args ExecArgs, resp *error) error {
-	*resp = c.Impl.Exec(args.cmd, args.args)
+	*resp = c.Impl.Exec(args.Cmd, args.Args)
 	return nil
 }
 
